@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>resourses/img/eur.png</file>
+        <file>resourses/img/rus.png</file>
+        <file>resourses/img/uah.png</file>
+        <file>resourses/img/usa.png</file>
+        <file>resourses/img/GBP.png</file>
+        <file>resourses/img/JPY</file>
+        <file>resourses/img/PLN</file>
+        <file>resourses/fonts/RobotoMono-Italic-VariableFont_wght.ttf</file>
+        <file>resourses/img/MyIcon.ico</file>
+    </qresource>
+</RCC>
