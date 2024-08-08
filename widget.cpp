@@ -60,10 +60,8 @@ QPushButton *Widget::createButton(QString digit)
 
 void Widget::addFonts()
 {
-    int id = QFontDatabase::addApplicationFont
+    QFontDatabase::addApplicationFont
         (":/new/prefix1/resourses/fonts/RobotoMono-Italic-VariableFont_wght.ttf");
-    QString family  = QFontDatabase::applicationFontFamilies(id).at(0);
-    qDebug()<<family;
 }
 
 void Widget::createGrid()
