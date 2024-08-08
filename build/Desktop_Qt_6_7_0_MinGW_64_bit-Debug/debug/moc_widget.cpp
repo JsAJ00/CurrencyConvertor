@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../../globalPtojects/MyCurrencyConvertor/widget.h"
+#include "../../../widget.h"
 #include <QtGui/qtextcursor.h>
 #include <QtNetwork/QSslPreSharedKeyAuthenticator>
 #include <QtNetwork/QSslError>

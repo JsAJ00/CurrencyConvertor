@@ -10,6 +10,7 @@ public:
     static QString getButtonDigitStyle();
     static QString getButtonOperationStyle();
     static QString getQLabelRealCurrencyStyle();
+    static QString getEditStyle();
 };
 
 #endif // MYSTYLESHEET_H

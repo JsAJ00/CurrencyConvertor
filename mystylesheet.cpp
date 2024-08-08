@@ -47,3 +47,10 @@ QString myStyleSheet::getQLabelRealCurrencyStyle()
            "    font-size: 15px;"
            "}";
 }
+
+QString myStyleSheet::getEditStyle()
+{
+    return "border: none;"
+           "font-size: 35px;"
+           "margin-right: 1px;";
+}

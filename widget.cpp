@@ -1,18 +1,29 @@
 #include "widget.h"
+#include "mystylesheet.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
 {
-    setFixedSize(WINDOWWIDTH, WINDOWWHIGHT);
-    setStyleSheet("background: #222222;");
+    //set main window
+    setFixedSize  (WINDOWWIDTH, WINDOWWHIGHT);
+    setStyleSheet ("background: #222222;");
     setWindowTitle("Currency Convertor");
-    setWindowIcon(QIcon(QPixmap(":/new/prefix1/resourses/img/MyIcon.ico")));
+    setWindowIcon (QIcon(QPixmap(":/new/prefix1/resourses/img/MyIcon.ico")));
 
 
-    QVBoxLayout* mainLayout = new QVBoxLayout(this);
-    top1 = new topAreaClass(":/new/prefix1/resourses/img/uah.png");
-    top2 = new topAreaClass(":/new/prefix1/resourses/img/uah.png");
+    //initializations
+    top1                    = new topAreaClass(":/new/prefix1/resourses/img/uah.png");
+    top2                    = new topAreaClass(":/new/prefix1/resourses/img/uah.png");
+    downArea                = new QWidget     (this);
+    currencyRate            = new QLabel      (downArea);
+    QVBoxLayout* mainLayout = new QVBoxLayout (this);
 
+
+    //settings
+    readSettings();
+
+
+    //set
     addFonts();
     createSplitter();
     createGrid();
@@ -20,11 +31,10 @@ Widget::Widget(QWidget *parent)
 
 
     //downArea
-    downArea = new QWidget(this);
     downArea->setFixedSize(360, 60);
 
+
     //realCurrency
-    currencyRate = new QLabel(downArea);
     currencyRate->setFixedSize(180,40);
     currencyRate->move(90, 0);
     currencyRate->setStyleSheet(myStyleSheet::getQLabelRealCurrencyStyle());
@@ -45,7 +55,11 @@ Widget::Widget(QWidget *parent)
     connect(manager, &QNetworkAccessManager::finished, this, &Widget::handleNetworkData);
 }
 
-Widget::~Widget() {}
+Widget::~Widget()
+{
+    writeSettings();
+}
+
 
 
 QPushButton *Widget::createButton(QString digit)
@@ -177,4 +191,27 @@ void Widget::handleNetworkData(QNetworkReply *reply)
 }
 
 
+void Widget::writeSettings()
+{
+    QSettings m_psettings("MyCompany","MyCurrencyConvertor");
+    m_psettings.beginGroup("/Settings");
 
+    m_psettings.setValue("/currencyOfUp",   top1->getCurrency());
+    m_psettings.setValue("/currencyOfDown", top2->getCurrency());
+
+    m_psettings.endGroup();
+}
+
+void Widget::readSettings()
+{
+    QSettings m_psettings("MyCompany","MyCurrencyConvertor");
+    m_psettings.beginGroup("/Settings");
+
+    QString upCurrency   = m_psettings.value("/currencyOfUp"  , "UAH").toString();
+    QString downCurrency = m_psettings.value("/currencyOfdown", "UAH").toString();
+
+    top1->changedFlag(upCurrency);
+    top2->changedFlag(downCurrency);
+
+    m_psettings.endGroup();
+}

@@ -1,8 +1,6 @@
 #ifndef TOPAREACLASS_H
 #define TOPAREACLASS_H
 
-#include <QtCore>
-
 #include <QObject>
 #include <QWidget>
 #include <QVBoxLayout>
@@ -16,6 +14,7 @@
 #include <QStringList>
 #include <QPushButton>
 #include <QFontDatabase>
+#include <QSettings>
 
 #include <QtNetwork>
 #include <QJsonDocument>
@@ -29,39 +28,34 @@ class topAreaClass : public QWidget
     Q_OBJECT
 public:
     explicit topAreaClass(QString path, QWidget *parent = nullptr);
+
     void setEdit(const QString& str);
-
-    void clear(){
-        m_pedit1->clear();
-    }
-
+    void setStartId();
+    void clear();
     void changedFlag(QString currency);
 
-    QString getM_edit1Text(){
-        return m_pedit1->text();
-    }
-    QString getCurrency(){
-        return m_pnameOfcurrency->currentText();
-    }
-
+    QString getM_edit1Text();
+    QString getCurrency();
     QString preparing;
+
 private slots:
     void slotCurrentIndexChanged();
 private:
-    QString m_path;
+    QString      m_path;
 
-    QWidget* topArea;
-    QWidget* leftTopArea;
+    QWidget*     topArea;
+    QWidget*     leftTopArea;
 
     QHBoxLayout* topHBoxLayout;
     QVBoxLayout* leftTopVBoxLayout;
 
-    QPixmap* m_ppixLabelCurrency;
-    QLabel* m_pcurrencyLabelPicture;
+    QPixmap*     m_ppixLabelCurrency;
+    QLabel*      m_pcurrencyLabelPicture;
 
-    QComboBox* m_pnameOfcurrency;
+    QComboBox*   m_pnameOfcurrency;
+    int id = 0;
 
-    QLineEdit* m_pedit1;
+    QLineEdit*   m_pedit;
 
 };
 

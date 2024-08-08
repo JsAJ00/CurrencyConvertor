@@ -2,7 +2,6 @@
 #define WIDGET_H
 
 #include "topareaclass.h"
-#include "mystylesheet.h"
 
 class Widget : public QWidget
 {
@@ -10,7 +9,10 @@ class Widget : public QWidget
 
 public:
     Widget(QWidget *parent = nullptr);
-    ~Widget();
+    virtual ~Widget();
+
+    void writeSettings();
+    void readSettings();
 private slots:
     void slotButtonClicked();
     void handleNetworkData(QNetworkReply* reply);
@@ -31,6 +33,8 @@ private:
     QLabel* currencyRate;
     QPushButton *createButton(QString digit);
     QGridLayout* gridForNum;
+
+
 
 };
 
